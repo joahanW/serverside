@@ -35,6 +35,17 @@ public class RegionService {
 
     // Create data
     public Region create(Region region) {
+        if (findByName(region.getName()) != null) {
+            throw new ResponseStatusException(HttpStatus.FOUND, "Data Sudah Dimasukkan");
+        }
+        return regionRepository.save(region);
+    }
+    
+     // Update data
+    public Region Update(Region region) {
+        if (findById(region.getId()) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data tidak ditemukan");
+        }
         return regionRepository.save(region);
     }
 

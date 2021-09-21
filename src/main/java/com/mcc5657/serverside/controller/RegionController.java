@@ -42,9 +42,6 @@ public class RegionController {
     
     @PostMapping
     public Region create(@RequestBody Region region) {
-        if (regionService.findByName(region.getName()) != null) {
-            return null;
-        }
         return regionService.create(region);
     }
     
@@ -55,10 +52,7 @@ public class RegionController {
     
     @PutMapping
     public Region update(@RequestBody Region region) {
-        if (regionService.findById(region.getId()) == null) {
-            return null;
-        }
-        return regionService.create(region);
+        return regionService.Update(region);
     }
     
     @DeleteMapping("/{id}")
