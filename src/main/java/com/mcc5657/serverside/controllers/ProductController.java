@@ -7,7 +7,10 @@ package com.mcc5657.serverside.controllers;
 
 import com.mcc5657.serverside.models.entities.Product;
 import com.mcc5657.serverside.services.ProductService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +32,13 @@ public class ProductController {
     private ProductService productService;
     
     @PostMapping
-    public Product create(@RequestBody Product product){
+    public Product create(@Valid @RequestBody Product product, Errors errors){
+        if (errors.hasErrors()) {
+            for (ObjectError error : errors.getAllErrors()) {
+                System.out.println(error.getDefaultMessage());
+            }
+            throw new RuntimeException("Validation Error");
+        }
         return productService.save(product);
     }
     
