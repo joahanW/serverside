@@ -1,2 +1,5 @@
 com\mcc5657\serverside\controller\RegionController.class
+com\mcc5657\serverside\repository\RegionRepository.class
+com\mcc5657\serverside\model\Region.class
+com\mcc5657\serverside\service\RegionService.class
 com\mcc5657\serverside\ServersideApplication.class
